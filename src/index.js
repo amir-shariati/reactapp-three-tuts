@@ -1,12 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {useRef, useState, Fragment} from 'react';
+import {useRef, useState, useEffect, Fragment} from 'react';
+
+import {Canvas, useFrame, useThree} from 'react-three-fiber';
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+
 
 import './index.css';
 
-import {Canvas, useFrame} from 'react-three-fiber'
+import {extend} from "react-three-fiber";
+extend({ OrbitControls })
 
+
+// const CameraController = () => {
+//     const { camera, gl } = useThree();
+//     useEffect(
+//         () => {
+//             const controls = new OrbitControls(camera, gl.domElement);
+//
+//             controls.minDistance = 3;
+//             controls.maxDistance = 20;
+//             return () => {
+//                 controls.dispose();
+//             };
+//         },
+//         [camera, gl]
+//     );
+//     return null;
+// };
 
 function Box(props) {
 
@@ -41,7 +63,7 @@ function Box(props) {
             onPointerOver={ e => setHover(true) }
             onPointerOut={ e => setHover(false) }
         >
-            <boxBufferGeometry attach={"geometry"} args={[2, 2, 2]} />
+            <boxBufferGeometry attach={"geometry"} args={[1, 1, 1]} />
             <meshStandardMaterial attach={"material"} color={ hovered ? 'hotpink' : 'rgb(70,70,70)' } />
 
         </mesh>
@@ -50,27 +72,60 @@ function Box(props) {
 
 }
 
-function App() {
-    return(
-        <Fragment>
-            <h1> React test </h1>
-            <Canvas>
+const Scene = () => {
+    const {
+        camera,
+        gl: { domElement }
+    } = useThree()
+    return (
+        <>
+            <ambientLight  />
+            <pointLight position={[10, 10, 10]} />
 
-                <ambientLight  />
-                <pointLight position={[10, 10, 10]} />
-
-                <Box position={[-2.2, 0, 0]} />
-                <Box position={[2.2, 0, 0]} />
-
-            </Canvas>
-        </Fragment>
+            <Box position={[-1.2, 0, 0]} />
+            <Box position={[1.2, 0, 0]} />
+            <orbitControls args={[camera, domElement]} />
+        </>
     )
 }
 
-const rootElement = document.getElementById('root');
-
 ReactDOM.render(
-    <App/> ,
-    rootElement
-);
+    <Canvas>
+        <Scene/>
+    </Canvas>,
+    document.getElementById('root')
+)
+
+// function App() {
+//     return(
+//         <div className={"main"}>
+//             <h1> Amir test</h1>
+//
+//             <Fragment>
+//                 <h1> React test </h1>
+//                 <Canvas>
+//
+//                     <CameraController/>
+//
+//                     <ambientLight  />
+//                     <pointLight position={[10, 10, 10]} />
+//
+//                     <Box position={[-1.2, 0, 0]} />
+//                     <Box position={[1.2, 0, 0]} />
+//
+//                 </Canvas>
+//             </Fragment>
+//
+//             <span className="header">Tohid Map</span>
+//
+//         </div>
+//     )
+// }
+//
+// const rootElement = document.getElementById('root');
+//
+// ReactDOM.render(
+//     <App/> ,
+//     rootElement
+// );
 
