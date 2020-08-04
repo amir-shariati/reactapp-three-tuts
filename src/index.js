@@ -11,6 +11,7 @@ import './index.css';
 import {CameraController} from "./components/cameraController";
 import {Box} from "./components/box";
 import {Counter} from "./components/counter";
+import {Cube} from "./components/cube";
 
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
 
                     <Box position={[-1.2, 0, 0]} />
                     <Box position={[1.2, 0, 0]} />
+
+                    <Cube position={[-1.2, 2, 0]} />
+                    <Cube position={[1.2, 2, 0]} />
 
                 </Canvas>
             </Fragment>
