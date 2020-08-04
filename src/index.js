@@ -1,33 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {useRef, useState, useEffect, Fragment} from 'react';
+import {Fragment} from 'react';
 
-import {Canvas, useFrame, useThree} from 'react-three-fiber';
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {Canvas} from 'react-three-fiber';
 
 
 import './index.css';
 
+import {CameraController} from "./components/cameraController";
 import {Box} from "./components/box";
 import {Counter} from "./components/counter";
 
-const CameraController = () => {
-    const { camera, gl } = useThree();
-    useEffect(
-        () => {
-            const controls = new OrbitControls(camera, gl.domElement);
-
-            controls.minDistance = 3;
-            controls.maxDistance = 20;
-            return () => {
-                controls.dispose();
-            };
-        },
-        [camera, gl]
-    );
-    return null;
-};
 
 function App() {
     return(
