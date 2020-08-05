@@ -12,7 +12,7 @@ import {CameraController} from "./components/cameraController";
 import {Box} from "./components/box";
 import {Counter} from "./components/counter";
 import {Cube} from "./components/cube";
-
+import {Shape} from "./components/shape";
 
 function App() {
     return(
@@ -29,14 +29,17 @@ function App() {
 
                     <CameraController/>
 
+
                     <ambientLight  />
                     <pointLight position={[10, 10, 10]} />
 
                     <Box position={[-1.2, 0, 0]} />
                     <Box position={[1.2, 0, 0]} />
 
-                    <Cube position={[-1.2, 2, 0]} />
-                    <Cube position={[1.2, 2, 0]} />
+                    {/*<Cube position={[-1.2, 2, 0]} />*/}
+                    {/*<Cube position={[1.2, 2, 0]} />*/}
+
+                    <Shape position={[1.2, 2, 0]} />
 
                 </Canvas>
             </Fragment>
